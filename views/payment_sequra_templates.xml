@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Generic redirect form: posts to the local seQura checkout controller. -->
+    <template id="redirect_form">
+        <form t-att-action="api_url" method="post">
+            <input type="hidden" name="reference" t-att-value="reference"/>
+            <input type="hidden" name="access_token" t-att-value="access_token"/>
+        </form>
+    </template>
+
+    <!-- Checkout page embedding the seQura identification form. -->
+    <template id="checkout" name="seQura Checkout">
+        <t t-call="web.frontend_layout">
+            <t t-set="no_header" t-value="False"/>
+            <t t-set="pageName" t-value="'sequra_checkout'"/>
+            <div id="wrap" class="oe_structure">
+                <div class="container my-5" style="max-width: 720px;">
+                    <h3 class="mb-2">Pago con seQura</h3>
+                    <p class="text-muted mb-4">
+                        Pedido <strong t-out="tx.reference"/> ·
+                        <strong t-out="'%.2f' % tx.amount"/> <t t-out="tx.currency_id.symbol"/>
+                    </p>
+                    <div id="sequra_form_container" class="border rounded p-3 bg-white">
+                        <t t-out="sequra_form"/>
+                    </div>
+                    <script type="text/javascript">
+                        (function () {
+                            var attempts = 0;
+                            var timer = setInterval(function () {
+                                attempts += 1;
+                                var instance = window.SequraFormInstance;
+                                if (instance) {
+                                    if (typeof instance.show === 'function') {
+                                        clearInterval(timer);
+                                        instance.show();
+                                        return;
+                                    }
+                                }
+                                if (attempts >= 100) {
+                                    clearInterval(timer);
+                                    var iframe = document.querySelector('.sq-identification-iframe');
+                                    if (iframe) { iframe.style.display = 'block'; }
+                                }
+                            }, 100);
+                        })();
+                    </script>
+                    <p class="mt-4">
+                        <a href="/shop/payment" class="text-muted">
+                            <i class="fa fa-chevron-left me-1"/>Volver al pago
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Error page shown when the seQura solicitation is refused. -->
+    <template id="checkout_error" name="seQura Checkout Error">
+        <t t-call="web.frontend_layout">
+            <div id="wrap" class="oe_structure">
+                <div class="container my-5" style="max-width: 720px;">
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">No se pudo iniciar el pago con seQura</h4>
+                        <p t-out="error_message"/>
+                        <hr/>
+                        <p class="mb-0">
+                            Puedes volver atrás y elegir otro método de pago.
+                        </p>
+                    </div>
+                    <a href="/shop/payment" class="btn btn-primary">Volver al pago</a>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

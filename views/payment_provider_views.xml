@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_provider_form" model="ir.ui.view">
+        <field name="name">seQura Provider Form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position="inside">
+                <group invisible="code != 'sequra'">
+                    <field
+                        string="Username"
+                        name="sequra_username"
+                        required="code == 'sequra' and state != 'disabled'"
+                    />
+                    <field
+                        string="Password"
+                        name="sequra_password"
+                        required="code == 'sequra' and state != 'disabled'"
+                        password="True"
+                    />
+                    <field
+                        string="Merchant Reference"
+                        name="sequra_merchant_ref"
+                        required="code == 'sequra' and state != 'disabled'"
+                    />
+                    <field
+                        string="Product Code (optional)"
+                        name="sequra_product_code"
+                        placeholder="p. ej. pp3 — vacío para mostrar todos"
+                    />
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>
