@@ -25,7 +25,7 @@ conector oficial de seQura para Odoo 12 (`sequra/Conector-Odoo-Sequra-Payment`).
    - Otros errores → se responde 500 para que seQura reintente el IPN.
 6. El shopper vuelve por `return_url` a `/payment/status` (página estándar).
 
-## Instalación (Docker, shop.makeadito.com)
+## Instalación (Docker)
 
 ```bash
 # 1. Copiar el módulo al directorio de addons montado en el contenedor
@@ -55,7 +55,7 @@ O desde la interfaz: Apps → Actualizar lista de aplicaciones → buscar "seQur
 
 ## Requisito de red (importante en tu setup)
 
-seQura debe poder alcanzar `https://shop.makeadito.com/payment/sequra/webhook`
+seQura debe poder alcanzar `https://domain.com/payment/sequra/webhook`
 (IPN) **por POST**. Verifica que:
 
 - Cloudflare no bloquee ni desafíe (challenge) esos POST: crea una WAF rule /
