@@ -2,7 +2,7 @@
 
 {
     'name': "Payment Provider: seQura",
-    'version': '19.0.1.0.3',
+    'version': '19.0.1.1.0',
     'category': 'Accounting/Payment Providers',
     'sequence': 350,
     'summary': "Pago flexible con seQura: fracciona, divide o paga después.",

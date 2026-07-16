@@ -46,6 +46,12 @@ class PaymentProvider(models.Model):
         default='pp3',
         copy=False,
     )
+    sequra_assets_key = fields.Char(
+        string="seQura Assets Key",
+        help="La clave de assets proporcionada por seQura, usada para cargar los "
+             "widgets promocionales (cuotas 'desde X €/mes') en la tienda.",
+        copy=False,
+    )
 
     # === COMPUTE METHODS === #
 

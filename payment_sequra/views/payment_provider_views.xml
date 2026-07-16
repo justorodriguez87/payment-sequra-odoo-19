@@ -29,6 +29,10 @@
                         name="sequra_product_code"
                         placeholder="p. ej. pp3 — vacío para mostrar todos"
                     />
+                    <field
+                        string="Assets Key (widgets)"
+                        name="sequra_assets_key"
+                    />
                 </group>
             </group>
         </field>

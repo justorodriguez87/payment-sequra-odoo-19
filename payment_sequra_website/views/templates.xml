@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- seQura promotional widget under the product price. -->
+    <template
+        id="product_price_sequra_widget"
+        inherit_id="website_sale.product_price"
+        name="seQura Promotional Widget"
+    >
+        <xpath expr="//div[@name='product_price']" position="inside">
+            <t t-set="sequra_widget_config"
+               t-value="not product.sequra_excluded
+                        and not combination_info['prevent_zero_price_sale']
+                        and request.env['payment.provider'].sudo()._sequra_get_widget_config(website)"/>
+            <div t-if="sequra_widget_config"
+                 class="o_sequra_widget_wrapper mt-2 w-100"
+                 t-att-data-sequra-config="json.dumps(sequra_widget_config)">
+                <div class="sequra-promotion-widget"
+                     t-att-data-product="sequra_widget_config['product']"
+                     t-att-data-amount="int(round(combination_info['price'] * 100))"
+                     data-size="M"
+                     style="min-height: 40px;"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>
