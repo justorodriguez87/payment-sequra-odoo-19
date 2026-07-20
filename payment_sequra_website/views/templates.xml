@@ -16,6 +16,7 @@
                  class="o_sequra_widget_wrapper mt-2 w-100"
                  t-att-data-sequra-config="json.dumps(sequra_widget_config)">
                 <div class="sequra-promotion-widget"
+                     data-version="v2"
                      t-att-data-product="sequra_widget_config['product']"
                      t-att-data-amount="int(round(combination_info['price'] * 100))"
                      data-size="M"
