@@ -2,7 +2,7 @@
 
 {
     'name': "seQura: eCommerce Widgets & Restrictions",
-    'version': '19.0.1.0.2',
+    'version': '19.0.1.1.0',
     'category': 'Accounting/Payment Providers',
     'summary': "Widgets promocionales de seQura y exclusión de productos no financiables.",
     'description': " ",

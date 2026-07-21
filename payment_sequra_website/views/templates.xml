@@ -24,5 +24,33 @@
             </div>
         </xpath>
     </template>
+    <!-- seQura promotional widget under the cart totals. -->
+    <template
+        id="cart_total_sequra_widget"
+        inherit_id="website_sale.total"
+        name="seQura Cart Widget"
+    >
+        <xpath expr="//div[hasclass('o_cart_total')]" position="after">
+            <t t-set="sequra_cart_excluded"
+               t-value="website_sale_order and any(
+                            l.product_id.product_tmpl_id.sequra_excluded
+                            for l in website_sale_order.website_order_line if l.product_id
+                        )"/>
+            <t t-set="sequra_widget_config"
+               t-value="website_sale_order and website_sale_order.website_order_line
+                        and not sequra_cart_excluded
+                        and request.env['payment.provider'].sudo()._sequra_get_widget_config(website)"/>
+            <div t-if="sequra_widget_config"
+                 class="o_sequra_widget_wrapper o_sequra_cart_widget mt-2 w-100"
+                 t-att-data-sequra-config="json.dumps(sequra_widget_config)">
+                <div class="sequra-promotion-widget"
+                     data-version="v2"
+                     t-att-data-product="sequra_widget_config['product']"
+                     t-att-data-amount="int(round(website_sale_order.amount_total * 100))"
+                     data-size="M"
+                     style="min-height: 40px;"/>
+            </div>
+        </xpath>
+    </template>
 
 </odoo>
