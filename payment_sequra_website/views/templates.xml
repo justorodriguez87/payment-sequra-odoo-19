@@ -30,7 +30,7 @@
         inherit_id="website_sale.total"
         name="seQura Cart Widget"
     >
-        <xpath expr="//div[hasclass('o_cart_total')]" position="after">
+        <xpath expr="." position="inside">
             <t t-set="sequra_cart_excluded"
                t-value="website_sale_order and any(
                             l.product_id.product_tmpl_id.sequra_excluded
